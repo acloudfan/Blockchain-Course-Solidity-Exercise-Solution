@@ -10,9 +10,11 @@ pragma solidity ^0.4.4;
 // Ex - 1 Part - 1, 2
 contract MultiNumberBettingAbstractV1 {
 
-  uint public constant MAX_BET=0.005
+  // Ex - 2 Part - 1, 2
+  uint public constant MAX_BET=0.005 ether;
+  uint public constant MIN_BET=0.000001 ether;
 
-  function guess(uint8 num, string name) returns (bool);
+  function guess(uint8 num, string name) payable returns (bool);
 
   function totalGuesses() returns (uint);
   
@@ -25,7 +27,8 @@ contract MultiNumberBettingAbstractV1 {
   function getLastWinnerInfo() returns (address winnerAddress,
                                          string  name,
                                          uint    guess,
-                                         uint    guessedAt);
+                                         uint    guessedAt,
+                                         uint    ethersReceived);
                                          
   function checkWinning(address addr) returns(bool);
 }
