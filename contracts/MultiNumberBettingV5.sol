@@ -43,11 +43,11 @@ contract MultiNumberBettingV5 is MultiNumberBettingAbstractV1 {
   function guess(uint8 num, string name) payable returns(bool)  {
 
     // If num > 10 throw
-    if(num > 10) throw;
+    if(num > 10) revert();
 
     // Ex - 4 Part - 1
     uint recvd = msg.value;
-    if(recvd < MIN_BET || recvd > MAX_BET)  throw;
+    if(recvd < MIN_BET || recvd > MAX_BET)  revert();
 
     for(uint8 i = 0 ; i < numArray.length ; i++){
       if(numArray[i] == num) {
@@ -110,7 +110,8 @@ contract MultiNumberBettingV5 is MultiNumberBettingAbstractV1 {
   // Ex - 3 
   function checkWinning(address addr) returns(bool){
     
-    return true;
+    return (winnersMapping[addr].guessedAt != 0);
+
   }
   
 }

@@ -42,8 +42,8 @@ contract MultiNumberBettingV4 {
   
   function guess(uint8 num, string name) returns (bool){
 
-    // If num > 10 throw
-    if(num > 10) throw;
+    // If num > 10 throw (replaced throw; with revert();)
+    if(num > 10) revert();
 
     for(uint8 i = 0 ; i < numArray.length ; i++){
       if(numArray[i] == num) {
@@ -120,8 +120,8 @@ contract MultiNumberBettingV4 {
 
   // Ex - 3 
   function checkWinning(address addr) returns(bool){
-    //return (winnersMapping[addr].guessedAt != 0);
-    return true;
+    
+    return (winnersMapping[addr].guessedAt != 0);
   }
   
 }

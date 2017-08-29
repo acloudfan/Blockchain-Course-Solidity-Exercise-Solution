@@ -31,8 +31,8 @@ contract MultiNumberBettingV3 {
   
   function guess(uint8 num, string name) returns (bool){
 
-    // Ex-4 If num > 10 throw
-    if(num > 10) throw;
+    // Ex-4 If num > 10 throw; replace throw with revert()
+    if(num > 10) revert();
 
     for(uint8 i = 0 ; i < numArray.length ; i++){
       if(numArray[i] == num) {
