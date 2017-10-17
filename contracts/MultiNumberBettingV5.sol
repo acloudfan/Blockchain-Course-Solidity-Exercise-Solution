@@ -18,6 +18,9 @@ contract MultiNumberBettingV5 is MultiNumberBettingAbstractV1 {
   
   address winner;
 
+  // Ex-2 Part 1, 2
+  uint public constant MAX_BET = 0.0005 ether;
+  uint public constant MIN_BET = 0.000001 ether;
   
   struct Winner {
     address winnerAddress;
