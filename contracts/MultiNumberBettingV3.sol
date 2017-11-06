@@ -88,6 +88,10 @@ contract MultiNumberBettingV3 {
     return (now - lastWinnerAt*1 minutes);
   }
 
+  function timeSinceLastWinner() private constant returns(uint) {
+    uint timeSince = now - lastWinnerAt * 1 seconds;
 
+    timeSince < now ? lastWinnerAt : 0;
+  }
   
 }
