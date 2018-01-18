@@ -46,7 +46,7 @@ contract MultiNumberBettingV5 is MultiNumberBettingAbstractV1 {
   function guess(uint8 num, string name) public payable returns (bool){
 
     // If num > 10 revert
-    if(num > 10) {
+    if (num > 10) {
       revert();
     }
 
@@ -75,7 +75,9 @@ contract MultiNumberBettingV5 is MultiNumberBettingAbstractV1 {
         // Its not a good practice to do this :)
         // Ideally you should use the withdrawal pattern
         // explained in the patterns section
-        msg.sender.transfer(2*msg.value);
+
+        uint sendBack = 2*msg.value;
+        msg.sender.transfer(sendBack);
 
         return true;
       }

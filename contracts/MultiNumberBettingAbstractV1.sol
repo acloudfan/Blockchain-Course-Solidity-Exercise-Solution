@@ -11,8 +11,8 @@ pragma solidity ^0.4.4;
 contract MultiNumberBettingAbstractV1 {
 
   // Ex - 2 Part - 1, 2
-  uint public constant MAX_BET=1 ether;
-  uint public constant MIN_BET=5 ether;
+  uint public constant MAX_BET=5 ether;
+  uint public constant MIN_BET=1 ether;
 
   function guess(uint8 num, string name) public payable returns (bool);
 
