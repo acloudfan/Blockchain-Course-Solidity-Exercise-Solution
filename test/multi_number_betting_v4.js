@@ -35,7 +35,7 @@ contract('MultiNumberBettingV4', function(accounts) {
       // Send a winning guess from Frank
       multi_number_betting_v4.guess(9,"Frank Smith",{from:franks_address});
       // Send a winning guess from Bill
-      multi_number_betting_v4.guess(10,"Bill Tale",{from:bills_address});
+      multi_number_betting_v4.guess(3,"Bill Tale",{from:bills_address});
       
 
       // Get the last winner name
@@ -49,7 +49,8 @@ contract('MultiNumberBettingV4', function(accounts) {
       // Get the last winner name
       return multi_number_betting_v4.checkWinning.call(bills_address,{from:bills_address});
     }).then(function(result){
-      console.log("Bill Won?  ",result);
+      console.log("Bill Won?  If you see non 0x0 information then Bill did win :)");
+      console.log(result);
     });
   });
 });

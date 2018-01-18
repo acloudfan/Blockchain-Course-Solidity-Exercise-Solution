@@ -17,7 +17,7 @@ contract MultiNumberBettingV4 {
   //Ex - 2 Part - 1 Remove this variable
   // string lastWinnerName ;
 
-  // Ex - 2 Keep this
+  // Ex - 2 Part-2 Keep this
   address winner;
 
   // Ex-1 Part - 1  Declare a struct
@@ -42,11 +42,13 @@ contract MultiNumberBettingV4 {
   
   function guess(uint8 num, string name) returns (bool){
 
-    // If num > 10 throw (replaced throw; with revert();)
-    if(num > 10) revert();
+    // If num > 10 revert
+    if(num > 10) {
+      revert();
+    }
 
-    for(uint8 i = 0 ; i < numArray.length ; i++){
-      if(numArray[i] == num) {
+    for (uint8 i = 0 ; i < numArray.length ; i++){
+      if (numArray[i] == num) {
         // Increase the winner count
         winnerCount++;
 
@@ -61,7 +63,7 @@ contract MultiNumberBettingV4 {
         // lastWinnerName = name;
 
         lastWinnerAt = winnersMapping[msg.sender].guessedAt;
-        winner=msg.sender;
+        winner = msg.sender;
 
         return true;
       }
@@ -107,21 +109,29 @@ contract MultiNumberBettingV4 {
     return (now - lastWinnerAt*1 minutes);
   }
 
-  // Ex - 2 Part - 4 
+  // Ex - 2 Part - 3 
+  // Remember winner holds the address of the winner so we are getting
+  // the information from the winnersMapping for the address
+  // all values will be 0x0 if winner=0x0 i.e., if there is no winner
   function getLastWinnerInfo() returns (address winnerAddress,
-                                         string  name,
-                                         uint    guess,
-                                         uint    guessedAt){
+                                         string  name, 
+                                         uint guess,
+                                         uint    guessedAt) {
     winnerAddress = winnersMapping[winner].winnerAddress;
-    name =  winnersMapping[winner].name;
+    name = winnersMapping[winner].name;
     guess = winnersMapping[winner].guess;
     guessedAt = winnersMapping[winner].guessedAt;
   }
 
   // Ex - 3 
-  function checkWinning(address addr) returns(bool){
-    
-    return (winnersMapping[addr].guessedAt != 0);
+  function checkWinning(address winnerAddress) public returns (address retWinnerAddress, string name, uint guessVal, uint guessedAt) {
+    Winner memory winnerLocal = winnersMapping[winnerAddress];
+    if (winnerLocal.guessedAt != 0) {
+        retWinnerAddress = winnerLocal.winnerAddress;
+        name = winnerLocal.name;
+        guessVal = winnerLocal.guess;
+        guessedAt = winnerLocal.guessedAt;
+    }
   }
   
 }

@@ -43,7 +43,7 @@ contract MultiNumberBettingV1 {
 
   // Ex-3
   /**
-   * make a change to the 1_deploy_contracts.js
+   * make a change to the 2_deploy_contracts.js
    *   provide the 3 numbers to the constructor
    * > testrpc
    * > truffle migrate

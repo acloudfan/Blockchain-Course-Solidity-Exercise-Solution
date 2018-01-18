@@ -16,6 +16,7 @@ contract MultiNumberBettingV3 {
 
   uint public lastWinnerAt;
   string lastWinnerName ;
+
   // Ex-3
   address winner;
 
@@ -29,20 +30,25 @@ contract MultiNumberBettingV3 {
   }
 
   
-  function guess(uint8 num, string name) returns (bool){
+  function guess(uint8 num, string name) returns (bool) {
 
-    // Ex-4 If num > 10 throw; replace throw with revert()
-    if(num > 10) revert();
+    // Ex-4 
+    // You may also use require(num <= 10)
+    if (num > 10) {
+      revert();
+    }
 
-    for(uint8 i = 0 ; i < numArray.length ; i++){
-      if(numArray[i] == num) {
+    for (uint8 i = 0 ; i < numArray.length ; i++) {
+      if (numArray[i] == num) {
         // Increase the winner count
         winnerCount++;
         lastWinnerName = name;
+
+        // Ex-1 Update to set the time
         lastWinnerAt = now;
 
         // Ex-3
-        winner=msg.sender;
+        winner = msg.sender;
 
         return true;
       }
@@ -51,24 +57,27 @@ contract MultiNumberBettingV3 {
     return false;
   }
 
-  function totalGuesses() returns (uint){
+  function totalGuesses() public returns (uint) {
     return (loserCount+winnerCount);
   }
 
 
   
-  function getLastWinner() returns (string){
+  function getLastWinner() returns (string) {
 
     bytes memory nameBytes = bytes(lastWinnerName);
+
     // If no winner send "***"
-    if(nameBytes.length == 0) return "***";
+    if (nameBytes.length == 0) {
+      return "***";
+    }
 
     string memory retString = new string(3);
 
-    bytes memory toReturn =  bytes(retString);
+    bytes memory toReturn = bytes(retString);
 
     // 2nd check to cover a winner name less than 3 bytes
-    for(uint i=0; (i < 3) && (i < nameBytes.length) ; i++){
+    for (uint i = 0; (i < 3) && (i < nameBytes.length) ; i++) {
       toReturn[i] = nameBytes[i];
     }
 
@@ -76,15 +85,15 @@ contract MultiNumberBettingV3 {
   }
 
   /** Ex-2 functions **/
-  function daysSinceLastWinning()  returns (uint){
+  function daysSinceLastWinning()  public returns (uint) {
     return (now - lastWinnerAt*1 days);
   }
 
-  function hoursSinceLastWinning() returns (uint){
+  function hoursSinceLastWinning() public returns (uint) {
     return (now - lastWinnerAt*1 hours);
   }
 
-  function  minutesSinceLastWinning() returns (uint){
+  function  minutesSinceLastWinning() public returns (uint) {
     return (now - lastWinnerAt*1 minutes);
   }
 

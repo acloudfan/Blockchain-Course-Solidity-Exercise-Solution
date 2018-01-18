@@ -38,24 +38,26 @@ contract MultiNumberBettingV2 {
     return false;
   }
 
-  function totalGuesses() returns (uint){
+  function totalGuesses() public returns (uint) {
     return (loserCount+winnerCount);
   }
 
 
   // Ex-3
-  function getLastWinner() returns (string){
+  function getLastWinner() returns (string) {
 
     bytes memory nameBytes = bytes(lastWinnerName);
     // If no winner send "***"
-    if(nameBytes.length == 0) return "***";
+    if (nameBytes.length == 0) {
+      return "***";
+    }
 
     string memory retString = new string(3);
 
-    bytes memory toReturn =  bytes(retString);
+    bytes memory toReturn = bytes(retString);
 
     // 2nd check to cover a winner name less than 3 bytes
-    for(uint i=0; (i < 3) && (i < nameBytes.length) ; i++){
+    for (uint i = 0; (i < 3) && (i < nameBytes.length); i++) {
       toReturn[i] = nameBytes[i];
     }
 
