@@ -86,15 +86,15 @@ contract MultiNumberBettingV3 {
 
   /** Ex-2 functions **/
   function daysSinceLastWinning()  public returns (uint) {
-    return (now - lastWinnerAt*1 days);
+    return (lastWinnerAt == 0 ? 0 : (now - lastWinnerAt) / 1 days);
   }
 
   function hoursSinceLastWinning() public returns (uint) {
-    return (now - lastWinnerAt*1 hours);
+    return (lastWinnerAt == 0 ? 0 : (now - lastWinnerAt) / 1 hours);
   }
 
   function  minutesSinceLastWinning() public returns (uint) {
-    return (now - lastWinnerAt*1 minutes);
+    return (lastWinnerAt == 0 ? 0 : (now - lastWinnerAt) / 1 minutes);
   }
 
   function timeSinceLastWinner() private constant returns(uint) {
